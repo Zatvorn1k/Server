@@ -1,0 +1,31 @@
+package com.example.demo.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.List;
+///asd
+
+@Entity
+@Data
+@AllArgsConstructor
+@RequiredArgsConstructor
+@Table(name = "author")
+public class AuthorEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @NotBlank(message = "Имя не может быть пустым")
+    private String name;
+    @NotBlank(message = "Фамилия не может быть пустой")
+    private String lastname;
+    @NotBlank(message = "Отчество не может быть пустым")
+    private String surname;
+    @JsonIgnore
+    @OneToMany(cascade =CascadeType.ALL, mappedBy = "author")
+    private List<BookEntity> book;
+}

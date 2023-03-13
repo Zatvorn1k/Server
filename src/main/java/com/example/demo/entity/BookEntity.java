@@ -1,10 +1,12 @@
 package com.example.demo.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 ///asd
 
@@ -18,13 +20,16 @@ public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @NotBlank
-    @Size()
     private String title;
     @NotBlank
-    private String author;
-    private String publisher;
-    private String year;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private AuthorEntity author;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "publisher_id")
+    private PublisherEntity publisher;
+    private int year;
     private String kind;
 }

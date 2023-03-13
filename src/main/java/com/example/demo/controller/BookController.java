@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.BookEntity;
+import com.example.demo.response.AuthorListResponse;
 import com.example.demo.response.BaseResponse;
 import com.example.demo.response.BookListResponse;
 import com.example.demo.response.BookResponse;
@@ -11,30 +12,20 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1")
-public class MainController {
+@RequestMapping("/api/v1/book")
+public class BookController {
     private final BookService service;
 
-    public MainController(BookService service) {
-        this.service = service;
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<BaseResponse> getAll(){
-        return ResponseEntity.ok(new BookListResponse(service.getAll()));
-    }
-
+    public BookController(BookService service) { this.service = service;}
 
     @PostMapping("/add")
-    public ResponseEntity<BookResponse>save(@Valid @RequestBody BookEntity data){
+    public ResponseEntity<BaseResponse> save(@RequestBody BookEntity data){
         try{
-            BookEntity temp = service.save(data);
-            return ResponseEntity.ok(new BookResponse( true,"Книга добавлена", temp));
+            return ResponseEntity.ok(new BaseResponse( true,"Книга добавлена"));
         } catch (Exception e){
-            return ResponseEntity.badRequest().body(new BookResponse(false, e.getMessage(), null));
+            return ResponseEntity.badRequest().body(new BaseResponse(false, e.getMessage()));
         }
     }
-
     @PostMapping("/update")
     public ResponseEntity<BaseResponse> update(@RequestBody BookEntity data) {
         try {
@@ -54,7 +45,9 @@ public class MainController {
             return ResponseEntity.badRequest().body(new BaseResponse(false, e.getMessage()));
         }
     }
+    @GetMapping("/all")
+    public ResponseEntity<BaseResponse> getAll(){
+        return ResponseEntity.ok(new AuthorListResponse(service.getAll()));
+    }
 }
-
-
 
