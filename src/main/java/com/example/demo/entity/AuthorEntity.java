@@ -18,7 +18,7 @@ import java.util.List;
 public class AuthorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @NotBlank(message = "Имя не может быть пустым")
     private String name;
     @NotBlank(message = "Фамилия не может быть пустой")

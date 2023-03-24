@@ -17,7 +17,7 @@ import java.util.List;
 public class PublisherEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotBlank(message = "Издательство не может быть пустым")
     private String publisher;

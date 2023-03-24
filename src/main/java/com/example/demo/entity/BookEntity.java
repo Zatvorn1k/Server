@@ -19,7 +19,7 @@ public class BookEntity {
     @Column(name = "book_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     @NotBlank
     private String title;
     @NotBlank

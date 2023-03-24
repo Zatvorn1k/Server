@@ -14,6 +14,8 @@ public class BookValidationUtils {
         if (book.getAuthor() == null) {
             throw new ValidationExceptionBook("Нужно выбрать автора");
         }
-        throw new ValidationExceptionBook("Нужно выбрать издательство");
+        if (book.getPublisher() == null) {
+            throw new ValidationExceptionBook("Нужно выбрать издательство");
+        }
     }
 }

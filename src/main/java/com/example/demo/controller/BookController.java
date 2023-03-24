@@ -12,18 +12,19 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/book")
+@RequestMapping("api/v1/book")
 public class BookController {
-    private final BookService service;
+    private BookService service;
 
     public BookController(BookService service) { this.service = service;}
 
-    @PostMapping("/add")
-    public ResponseEntity<BaseResponse> save(@RequestBody BookEntity data){
-        try{
-            return ResponseEntity.ok(new BaseResponse( true,"Книга добавлена"));
-        } catch (Exception e){
-            return ResponseEntity.badRequest().body(new BaseResponse(false, e.getMessage()));
+    @PostMapping("/add") // добавить книгу в БД
+    public ResponseEntity <BookResponse> registration(@RequestBody BookEntity data) {
+        try {
+            BookEntity temp = service.save(data);
+            return ResponseEntity.ok (new BookResponse( true, "Kнигa дoбaвлена", temp));
+        }catch (Exception e) {
+            return ResponseEntity.badRequest().body(new BookResponse(false, e.getMessage(), null));
         }
     }
     @PostMapping("/update")
@@ -47,7 +48,7 @@ public class BookController {
     }
     @GetMapping("/all")
     public ResponseEntity<BaseResponse> getAll(){
-        return ResponseEntity.ok(new AuthorListResponse(service.getAll()));
+        return ResponseEntity.ok(new BookListResponse(service.getAll()));
     }
 }
 

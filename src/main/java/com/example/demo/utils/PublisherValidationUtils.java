@@ -4,7 +4,7 @@ import com.example.demo.entity.PublisherEntity;
 import com.example.demo.exception.ValidationExceptionPublisher;
 
 public class PublisherValidationUtils {
-    public static void validationPublisher (PublisherEntity data) throws ValidationExceptionPublisher{
+    public static void publisherValidationUtils(PublisherEntity data) throws ValidationExceptionPublisher{
         String title = data.getPublisher();
         if ( title == null || title.isBlank()) {
             throw new ValidationExceptionPublisher("Название не должно быть пустым");

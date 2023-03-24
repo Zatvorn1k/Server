@@ -1,5 +1,6 @@
 package com.example.demo.response;
 
+import com.example.demo.entity.AuthorEntity;
 import com.example.demo.entity.BookEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -7,10 +8,10 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class AuthorListResponse extends BaseResponse{
-    public AuthorListResponse(Iterable<BookEntity> data){
+    public AuthorListResponse(Iterable<AuthorEntity> data){
         super(true,"Авторы");
         this.data = data;
     }
 
-    private Iterable<BookEntity> data;
+    private Iterable<AuthorEntity> data;
 }

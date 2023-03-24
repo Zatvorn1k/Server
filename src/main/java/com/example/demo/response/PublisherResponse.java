@@ -7,9 +7,8 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class    PublisherResponse extends BaseResponse {
+public class PublisherResponse extends BaseResponse {
     public PublisherResponse(boolean success , String message, PublisherEntity publisher){
-
         super(success,message);
         this.publisher = publisher;
     }
